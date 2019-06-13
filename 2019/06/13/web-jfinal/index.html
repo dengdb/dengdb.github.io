@@ -1,0 +1,485 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  
+    <title>web框架之jfinal | 黑子的独立博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Black King">
+    
+
+    
+    <meta name="description" content="web框架之jfinal介绍web框架除了现最流行的spring mvc,还有其他如jfinal，jersery等。现在学习jfinal的基础。jfinal有相关的开发者社区，其中最有名是一个叫“波总”的人。 官方文档在https://www.jfinal.com/doc/2-4。jfinal的优点：开发极简，秒速启动，拥有很多与spring类似的特性，内嵌undertow,jetty，上手快，学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web框架之jfinal">
+<meta property="og:url" content="http://dengdb.github.io/2019/06/13/web-jfinal/index.html">
+<meta property="og:site_name" content="黑子的独立博客">
+<meta property="og:description" content="web框架之jfinal介绍web框架除了现最流行的spring mvc,还有其他如jfinal，jersery等。现在学习jfinal的基础。jfinal有相关的开发者社区，其中最有名是一个叫“波总”的人。 官方文档在https://www.jfinal.com/doc/2-4。jfinal的优点：开发极简，秒速启动，拥有很多与spring类似的特性，内嵌undertow,jetty，上手快，学">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-13T07:22:53.090Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="web框架之jfinal">
+<meta name="twitter:description" content="web框架之jfinal介绍web框架除了现最流行的spring mvc,还有其他如jfinal，jersery等。现在学习jfinal的基础。jfinal有相关的开发者社区，其中最有名是一个叫“波总”的人。 官方文档在https://www.jfinal.com/doc/2-4。jfinal的优点：开发极简，秒速启动，拥有很多与spring类似的特性，内嵌undertow,jetty，上手快，学">
+
+    
+    <link rel="alternative" href="/atom.xml" title="黑子的独立博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/kkx.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/swk.gif" alt="黑子的独立博客" title="黑子的独立博客"></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="黑子的独立博客">黑子的独立博客</a></h1>
+				<h2 class="blog-motto">生命不息编码不止</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索">
+						<input type="hidden" name="q" value="site:dengdb.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</ul></nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/06/13/web-jfinal/" title="web框架之jfinal" itemprop="url">web框架之jfinal</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Black King" target="_blank" itemprop="author">Black King</a>
+		
+  </p><p class="article-time">
+    <time datetime="2019-06-13T07:56:42.000Z" itemprop="datePublished"> 发表于 2019-06-13</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#web框架之jfinal"><span class="toc-number">1.</span> <span class="toc-text">web框架之jfinal</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-number">1.1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hello-World"><span class="toc-number">1.2.</span> <span class="toc-text">Hello World</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参数注入以及拦截器"><span class="toc-number">1.3.</span> <span class="toc-text">参数注入以及拦截器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON的支持"><span class="toc-number">1.4.</span> <span class="toc-text">JSON的支持</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Model的使用"><span class="toc-number">1.5.</span> <span class="toc-text">Model的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kit的使用"><span class="toc-number">1.6.</span> <span class="toc-text">Kit的使用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">2.</span> <span class="toc-text">总结</span></a></li></ol>
+		
+		</div>
+		
+		<h1 id="web框架之jfinal"><a href="#web框架之jfinal" class="headerlink" title="web框架之jfinal"></a>web框架之jfinal</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>web框架除了现最流行的spring mvc,还有其他如jfinal，jersery等。现在学习jfinal的基础。<br>jfinal有相关的开发者社区，其中最有名是一个叫“波总”的人。 官方文档在<a href="https://www.jfinal.com/doc/2-4。" target="_blank" rel="noopener">https://www.jfinal.com/doc/2-4。</a><br>jfinal的优点：开发极简，秒速启动，拥有很多与spring类似的特性，内嵌undertow,jetty，上手快，学习成本低。<br>jfinal的缺点:文档不够丰富，案例不够完善，感觉功能配套不是很齐全。  </p>
+<hr>
+<h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><p>jfinal的最重要的类是JFinalConfig，基本所有的相关的配置都是在这个类上进行。<br>最简单的使用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> io.github.black.jfinal.demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.jfinal.config.*;</span><br><span class="line"><span class="keyword">import</span> com.jfinal.json.JacksonFactory;</span><br><span class="line"><span class="keyword">import</span> com.jfinal.plugin.activerecord.ActiveRecordPlugin;</span><br><span class="line"><span class="keyword">import</span> com.jfinal.plugin.druid.DruidPlugin;</span><br><span class="line"><span class="keyword">import</span> com.jfinal.server.undertow.UndertowServer;</span><br><span class="line"><span class="keyword">import</span> com.jfinal.template.Engine;</span><br><span class="line"><span class="keyword">import</span> io.github.black.jfinal.demo.controller.HelloController;</span><br><span class="line"><span class="keyword">import</span> io.github.black.jfinal.demo.entity._MappingKit;</span><br><span class="line"><span class="keyword">import</span> io.github.black.jfinal.demo.handler.ResourcesHandler;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoConfig</span> <span class="keyword">extends</span> <span class="title">JFinalConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        UndertowServer.start(DemoConfig.class,<span class="number">8091</span>,<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configConstant</span><span class="params">(Constants constants)</span> </span>&#123;</span><br><span class="line">        constants.setDevMode(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configRoute</span><span class="params">(Routes routes)</span> </span>&#123;</span><br><span class="line">        routes.add(<span class="string">"/hello"</span>, HelloController.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configEngine</span><span class="params">(Engine engine)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configPlugin</span><span class="params">(Plugins plugins)</span> </span>&#123;</span><br><span class="line">       </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configInterceptor</span><span class="params">(Interceptors interceptors)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configHandler</span><span class="params">(Handlers handlers)</span> </span>&#123;</span><br><span class="line">     </span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStart</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> <span class="keyword">extends</span> <span class="title">Controller</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">index</span><span class="params">()</span></span>&#123;</span><br><span class="line">        renderText(<span class="string">"Hello JFinal World"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后打开浏览器<a href="http://localhost:8091/hello" target="_blank" rel="noopener">http://localhost:8091/hello</a>  </p>
+<p>很有意思的一点，可以很方便返回一个二维码：<br>首先添加maven配置：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;com.google.zxing&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;javase&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;3.2.1&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>demo如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">qrCode</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// 二维码携带的数据</span></span><br><span class="line">        String data = <span class="string">"dengdb.github.io"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 渲染二维码图片，长度与宽度为 200 像素</span></span><br><span class="line">        renderQrCode(data, <span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="参数注入以及拦截器"><a href="#参数注入以及拦截器" class="headerlink" title="参数注入以及拦截器"></a>参数注入以及拦截器</h2><p>jfinal使用@Inject进行字段进行注入，只能是由jfinal管理的对象才行，如controller，Interceptor等。对于非jfinal组件，可以使用Aop.get(); 至于Aop.inject()没找到该怎么用。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> LoginDao loginDao = Aop.get(LoginDao.class);</span><br><span class="line"></span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line">在jfinalConfig中开启配置</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configConstant</span><span class="params">(Constants constants)</span> </span>&#123;</span><br><span class="line">        constants.setDevMode(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">// 开启对 jfinal web 项目组件 Controller、Interceptor、Validator 的注入</span></span><br><span class="line">        constants.setInjectDependency(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>经过测试，在不同的地方使用Aop.get()获取到的是同一个对象。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginServiceT</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> LoginDao loginDao = Aop.get(LoginDao.class);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">loginT</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(loginDao);</span><br><span class="line">        <span class="keyword">return</span> loginDao.save();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> LoginDao loginDao = Aop.get(LoginDao.class);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">login</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(loginDao);</span><br><span class="line">        <span class="keyword">return</span> loginDao.save();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>查看控制台打印日志，两个loginDao为同一个对象。<br>关于jfinal的入参注入问题，官文有相关文档，大致有以下几种方式:<br>1.在Action中直接使用，jfinal自动转换。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> <span class="keyword">extends</span> <span class="title">Controller</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getJson</span><span class="params">(User user)</span></span>&#123;</span><br><span class="line">        renderJson(<span class="string">"name"</span>,user.getName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我用post+json方式测试过，返回的是null,官文案例使用form表单方式，没测试过。<br>2.使用getPara()方式。 controller里内置了很多方法，如renderText(),renderJson,getPara()等，在controller中使用getpara()或者其重载方法，可以很方便的获取入参。<br>3.使用HttpKit。 jfinal内置了很多kit，如PropKit,Aop其实也算一个kit，DbKit。在controller中使用HttpKit可以获取入参：HttpKit.readData(getRequest());  </p>
+<h2 id="JSON的支持"><a href="#JSON的支持" class="headerlink" title="JSON的支持"></a>JSON的支持</h2><p>jfinal支持四种json，其中包括jacsonJson和fastJson。只需在jfinalConfig中配置即可。renderJson会按照配置的json进行转换。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configConstant</span><span class="params">(Constants constants)</span> </span>&#123;</span><br><span class="line">        constants.setDevMode(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">//配置json</span></span><br><span class="line">        constants.setJsonFactory(<span class="keyword">new</span> JacksonFactory());</span><br><span class="line">        <span class="comment">// 开启对 jfinal web 项目组件 Controller、Interceptor、Validator 的注入</span></span><br><span class="line">        constants.setInjectDependency(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="Model的使用"><a href="#Model的使用" class="headerlink" title="Model的使用"></a>Model的使用</h2><p>使用jfinal的generator生成model和配置。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> io.github.black.jfinal.demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.jfinal.kit.PathKit;</span><br><span class="line"><span class="keyword">import</span> com.jfinal.plugin.activerecord.generator.Generator;</span><br><span class="line"><span class="keyword">import</span> com.jfinal.plugin.druid.DruidPlugin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.sql.DataSource;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ModelGenerator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> DruidPlugin <span class="title">getDP</span><span class="params">()</span></span>&#123;</span><br><span class="line">        DruidPlugin dp = <span class="keyword">new</span> DruidPlugin(<span class="string">"jdbc:mysql://10.108.136.128/blackdb"</span>, <span class="string">"root"</span>, <span class="string">"123456"</span>);</span><br><span class="line">        <span class="keyword">return</span> dp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// base model 所使用的包名</span></span><br><span class="line">        String baseModelPkg = <span class="string">"io.github.black.jfinal.demo.entity.base"</span>;</span><br><span class="line">        <span class="comment">// base model 文件保存路径</span></span><br><span class="line">        String baseModelDir = PathKit.getWebRootPath() + <span class="string">"/src/main/java/io/github/black/jfinal/demo/entity/base"</span>;</span><br><span class="line">        <span class="comment">// model 所使用的包名</span></span><br><span class="line">        String modelPkg = <span class="string">"io.github.black.jfinal.demo.entity"</span>;</span><br><span class="line">        <span class="comment">// model 文件保存路径</span></span><br><span class="line">        String modelDir = baseModelDir + <span class="string">"/.."</span>;</span><br><span class="line"></span><br><span class="line">        DruidPlugin dp = getDP();</span><br><span class="line">        dp.start();</span><br><span class="line">        DataSource ds = dp.getDataSource();</span><br><span class="line">        Generator gernerator = <span class="keyword">new</span> Generator(ds, baseModelPkg, baseModelDir, modelPkg, modelDir);</span><br><span class="line">        <span class="comment">// 在 getter、setter 方法上生成字段备注内容</span></span><br><span class="line">        gernerator.setGenerateRemarks(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 设置是否生成链式 setter 方法</span></span><br><span class="line"><span class="comment">//        gernerator.setGenerateChainSetter(false);</span></span><br><span class="line">        <span class="comment">// 添加不需要生成的表名</span></span><br><span class="line"><span class="comment">//        gernerator.addExcludedTable("adv");</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//覆盖掉其中的 isSkipTable(String tableName) 方法，可以随心所欲控制想要的处理的 table</span></span><br><span class="line">        ModelMetaBuilder metaBuilder = <span class="keyword">new</span> ModelMetaBuilder(ds);</span><br><span class="line">        gernerator.setMetaBuilder(metaBuilder);</span><br><span class="line">        <span class="comment">// 设置是否在 Model 中生成 dao 对象</span></span><br><span class="line">        gernerator.setGenerateDaoInModel(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">// 设置是否生成链式 setter 方法</span></span><br><span class="line">        gernerator.setGenerateChainSetter(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">// 设置是否生成字典文件</span></span><br><span class="line">        gernerator.setGenerateDataDictionary(<span class="keyword">false</span>);</span><br><span class="line">        <span class="comment">// 设置需要被移除的表名前缀用于生成modelName。例如表名 "osc_user"，移除前缀 "osc_"后生成的model名为 "User"而非 OscUser</span></span><br><span class="line"><span class="comment">//        gernerator.setRemovedTableNamePrefixes("t_");</span></span><br><span class="line">        <span class="comment">// 生成</span></span><br><span class="line">        gernerator.generate();</span><br><span class="line">        dp.stop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>小结：<br>生成器根据数据库配置，扫描相关的表，生成相应的model。这里最主要的是，获取DataSource，然后是配置model的包路径，baseModel一般在model的base下面；gernerator.addExcludedTable(“adv”)可以排除不需要的表，如果太多，也可以使用MetaBuilder，复写isSkipTable()方法，随心所欲的控制想要处理的table。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ModelMetaBuilder</span> <span class="keyword">extends</span> <span class="title">MetaBuilder</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ModelMetaBuilder</span><span class="params">(DataSource dataSource)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(dataSource);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * isSkipTable 方法 return true 时将过滤掉当前 table</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> tableName</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">isSkipTable</span><span class="params">(String tableName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">"user"</span>.equalsIgnoreCase(tableName)|| <span class="string">"wesd_cert"</span>.equalsIgnoreCase(tableName))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上诉代码执行后，会在model下生成一个_MappingKit类（或者其他名字），该类需要在jfinalConfig中使用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configPlugin</span><span class="params">(Plugins plugins)</span> </span>&#123;</span><br><span class="line">        DruidPlugin dp = <span class="keyword">new</span> DruidPlugin(<span class="string">"jdbc:mysql://10.108.136.128/blackdb"</span>, <span class="string">"root"</span>, <span class="string">"123456"</span>);</span><br><span class="line">        plugins.add(dp);</span><br><span class="line">        ActiveRecordPlugin arp = <span class="keyword">new</span> ActiveRecordPlugin(dp);</span><br><span class="line">        _MappingKit.mapping(arp);</span><br><span class="line"><span class="comment">//       arp.addMapping("user", User.class);</span></span><br><span class="line">        plugins.add(arp);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="Kit的使用"><a href="#Kit的使用" class="headerlink" title="Kit的使用"></a>Kit的使用</h2><p>PropKit.use()<br>HttpKit.readData(),HttpKit.post(),HttpKit.get()<br>DbKit.getConfig()<br>更多参考com.jfinal.kit包  </p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>jfinal的开发和代码真的是极简，上手快。 但是实际应用的案例太少，还有很多的功能需要完善。<br>jfinal还有关于redis插件和其他模板渲染插件以及缓存插件，任务调度插件，以后再测试。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://dengdb.github.io/2019/06/13/web-jfinal/" data-title="web框架之jfinal | 黑子的独立博客" data-tsina class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2019/06/05/http-introduce/" title="http introduce">
+ <strong>下一篇：</strong><br> 
+ <span>http introduce
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2019/06/13/web-jfinal/" data-title="web框架之jfinal" data-url="http://dengdb.github.io/2019/06/13/web-jfinal/"></div>
+</section>
+
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#web框架之jfinal"><span class="toc-number">1.</span> <span class="toc-text">web框架之jfinal</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-number">1.1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hello-World"><span class="toc-number">1.2.</span> <span class="toc-text">Hello World</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参数注入以及拦截器"><span class="toc-number">1.3.</span> <span class="toc-text">参数注入以及拦截器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON的支持"><span class="toc-number">1.4.</span> <span class="toc-text">JSON的支持</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Model的使用"><span class="toc-number">1.5.</span> <span class="toc-text">Model的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kit的使用"><span class="toc-number">1.6.</span> <span class="toc-text">Kit的使用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">2.</span> <span class="toc-text">总结</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="dengdb" data-theme="medium"></div>
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+</div>
+
+
+
+  
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 把握好时机，BKB出早了出晚了都不好. <br>
+			try-debug-fix-continue</p>
+	</section>
+	 
+	<div class="social-font">
+		
+		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/dengdb" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:475059284@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Black King">Black King</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"黑子"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
